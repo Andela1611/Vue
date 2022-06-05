@@ -1,17 +1,38 @@
 <template>
   <div class="favorites">
-      <p>Favorite jokes</p>
+    <p>Favorite jokes</p>
+
+    <ul v-for="(joke,i )in jokes" v-bind:key="i">
+      <li>{{ joke }} --- {{ i }}</li>
+    </ul>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-//import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script>
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: 'FavoriteJoke',
-  components: {
-   
+  name: "FavoriteJoke",
+  components: {},
+  methods: {},
+  mounted() {
+    function forEachKey(callback) {
+      for (var i = 0; i < localStorage.length; i++) {
+        callback(localStorage.key(i));
+      }
+    }
+    var jokes = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      jokes = localStorage.getItem(localStorage.key(i));
+      console.log(jokes, i);
+    }
+  },
+
+  data() {
+    return {
+      jokes: [],
+      i: [],
+    };
   },
 });
 </script>

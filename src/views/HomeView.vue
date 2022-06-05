@@ -10,41 +10,29 @@
 <script>
 import { defineComponent } from "vue";
 import axios from "axios";
-
 export default defineComponent({
   name: "HomeView",
   components: {},
   methods: {
     favorite() {
-      var data = [];
-      if (!(localStorage.getItem("favorites") === null)) {
-        data = JSON.parse(localStorage.getItem("favorites"));
+      var id = [];
+      if (!(localStorage.getItem(this.list.id) === null)) {
+        id = JSON.parse(localStorage.getItem("id"));
       }
-
-      const joke = [this.list.id, this.list.joke];
-      data.push(joke);
-      window.localStorage.setItem("favorites", JSON.stringify(data));
+      const joke = [this.list.joke];
+      id.push(joke);
+      window.localStorage.setItem(this.list.id, JSON.stringify(joke));
     },
 
-    watch: {
-      list: {
-        handler() {
-          localStorage.setItem("joke", this.list.joke);
-        },
-        deep: true,
-      },
-    },
     reloadPage() {
       window.location.reload();
     },
   },
-
   data() {
     return {
       list: [],
     };
   },
-
   async mounted() {
     let result = await axios.get("http://api.icndb.com/jokes/random");
     console.log(result.data.value);
