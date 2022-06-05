@@ -2,8 +2,8 @@
   <div class="favorites">
     <p>Favorite jokes</p>
 
-    <ul v-for="(joke,i )in jokes" v-bind:key="i">
-      <li>{{ joke }} --- {{ i }}</li>
+    <ul v-for="(jokes,i )in jokes" v-bind:key="i">
+      <li>{{ jokes }} --- {{ i }}</li>
     </ul>
   </div>
 </template>
